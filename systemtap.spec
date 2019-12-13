@@ -366,6 +366,11 @@ done
 /etc/stap-exporter
 %doc README README.unprivileged AUTHORS NEWS
 %license COPYING
+%if %{with_crash}
+%dir %{_libdir}/systemtap
+%{_libdir}/%{name}/staplog.so*
+%{_exec_prefix}/lib/debug/usr/lib64/%{name}/staplog.so-%{version}-%{release}.x86_64.debug
+%endif
 %exclude %{_bindir}/dtrace
 %exclude %{python3_sitearch}/HelperSDT
 %exclude %{python3_sitearch}/HelperSDT-*.egg-info
