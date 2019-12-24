@@ -27,7 +27,7 @@
 
 Name: systemtap
 Version: 4.1
-Release: 1
+Release: 2
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap/
@@ -52,6 +52,7 @@ BuildRequires: crash-devel zlib-devel
 %endif
 %if %{with_virthost}
 BuildRequires: pkgconfig(libvirt) pkgconfig(libxml-2.0)
+Requires: libvirt > 2.0
 %endif
 
 Requires: nss coreutils zip unzip shadow-utils chkconfig systemd
@@ -59,7 +60,6 @@ Requires: shadow-utils openssh-clients python3-pyparsing pyparsing
 Requires: which elfutils grep nc gcc gcc-c++ make glibc-devel
 Requires: strace nmap-ncat avahi perl iproute libxml2 findutils
 Requires: kernel-devel
-Requires: libvirt > 2.0
 %if %{with_openssl}
 Requires: openssl
 %endif
@@ -416,5 +416,8 @@ done
 %files lang -f systemtap.lang
 
 %changelog
+* Tue Dec 24 2019 caomeng <caomeng5@huawei.com>
+- fix build requirement about libvirt
+
 * Mon Aug 12 2019 openEuler Buildteam <buildteam@openeuler.org> - 4.1.1
 - Package init
