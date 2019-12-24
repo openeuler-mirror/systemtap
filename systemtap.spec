@@ -416,7 +416,7 @@ done
 %files lang -f systemtap.lang
 
 %changelog
-* Tue Dec 24 2019 caomeng <caomeng5@huawei.com>
+* Tue Dec 24 2019 caomeng <caomeng5@huawei.com> - 4.1.2
 - fix build requirement about libvirt
 
 * Mon Aug 12 2019 openEuler Buildteam <buildteam@openeuler.org> - 4.1.1
