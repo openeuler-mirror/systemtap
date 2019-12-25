@@ -27,7 +27,7 @@
 
 Name: systemtap
 Version: 4.1
-Release: 2
+Release: 1
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap/
@@ -416,8 +416,5 @@ done
 %files lang -f systemtap.lang
 
 %changelog
-* Tue Dec 24 2019 caomeng <caomeng5@huawei.com> - 4.1.2
-- fix build requirement about libvirt
-
 * Mon Aug 12 2019 openEuler Buildteam <buildteam@openeuler.org> - 4.1.1
 - Package init
