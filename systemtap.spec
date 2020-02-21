@@ -27,7 +27,7 @@
 
 Name: systemtap
 Version: 4.1
-Release: 1
+Release: 2
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap/
@@ -56,7 +56,7 @@ Requires: libvirt > 2.0
 %endif
 
 Requires: nss coreutils zip unzip shadow-utils chkconfig systemd
-Requires: shadow-utils openssh-clients python3-pyparsing pyparsing
+Requires: shadow-utils openssh-clients python3-pyparsing
 Requires: which elfutils grep nc gcc gcc-c++ make glibc-devel
 Requires: strace nmap-ncat avahi perl iproute libxml2 findutils
 Requires: kernel-devel
@@ -416,5 +416,8 @@ done
 %files lang -f systemtap.lang
 
 %changelog
+* Fri Feb 21 2020 yuxiangyang <yuxiangyang4@huawei.com> - 4.1.2
+- Delete the requirement of python2-pyparsing
+
 * Mon Aug 12 2019 openEuler Buildteam <buildteam@openeuler.org> - 4.1.1
 - Package init
