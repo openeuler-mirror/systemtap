@@ -21,16 +21,12 @@
 %undefine __brp_mangle_shebangs
 
 Name: systemtap
-Version: 4.1
-Release: 3
+Version: 4.3
+Release: 1
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
 Source: https://sourceware.org/systemtap/ftp/releases/%{name}-%{version}.tar.gz
-
-Patch0:	fix-py3example-script-run-fail.patch
-Patch1:	fix-py3example-script-run-fail-2.patch
-Patch2:	fix-network-tcp-test.patch
 
 BuildRequires: gcc-c++ emacs systemd python3-setuptools
 BuildRequires: gettext-devel rpm-devel readline-devel
@@ -456,6 +452,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Thu Jul 21 2020 jinzhimin <jinzhimin2@huawei.com> - 4.3-1
+- upgrade to 4.3
+
 * Fri Mar 13 2020 yuxiangyang <yuxiangyang4@huawei.com> - 4.1.3
 - remove java-runtime
 
