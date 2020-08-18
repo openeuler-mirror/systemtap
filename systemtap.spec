@@ -22,7 +22,7 @@
 
 Name: systemtap
 Version: 4.1
-Release: 4
+Release: 5
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
@@ -456,6 +456,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Tue Aug 18 2020 yangzhuangzhuang <yangzhuangzhuang1@huawei.com> - 4.1.5
+- rebuild for requirement package update
+
 * Mon May 18 2020 yuxiangyang <yuxiangyang4@huawei.com> - 4.1.4
 - rebuild for dyninst update
 
