@@ -1,0 +1,33 @@
+name: systemtap
+old_version: 4.1
+new_version: 4.3
+interface_differences:
+- type: 'feature'
+  item: 支持eBPF功能
+  diff: 新增
+  influence: 支持prometheus导出器、procfs探针等eBPF功能
+- type: 'feature'
+  item: 同名probe解析功能
+  diff: 新增
+  influence: 支持用不同的PC地址去区分多个同名的probe
+- type: 'feature'
+  item: 后端执行器支持try-catch捕获异常
+  diff: 新增
+  influence: 不影响
+- type: 'ABI'
+  item: 新增gettimeofday()
+  diff: 返回当前的时间
+  influence: 不影响
+- type: 'ABI'
+  item: 新增dump_stack()
+  diff: 打印内核调用栈
+  influence: 不影响
+- type: 'ABI'
+  item: gettimeofday_*
+  diff: 返回当前的时间
+  influence: 不影响
+- type: 'CLI'
+  item: 加强对$variable变量类型的检查
+  diff: 可能在解析和编译的时候输出更多的告警信息
+  influence: 尽可能的修正这些告警信息，虽然不会影响最终的执行结果
+remark: '功能增强，无影响;'
