@@ -21,7 +21,7 @@
 %undefine __brp_mangle_shebangs
 
 Name: systemtap
-Version: 4.3
+Version: 4.4
 Release: 1
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
@@ -452,6 +452,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Mon Feb 1 2021 xinghe <xinghe1@huawei.com> - 4.4-1
+- upgrade to 4.4
+
 * Thu Jul 21 2020 jinzhimin <jinzhimin2@huawei.com> - 4.3-1
 - upgrade to 4.3
 
