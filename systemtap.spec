@@ -22,7 +22,7 @@
 
 Name: systemtap
 Version: 4.3
-Release: 1
+Release: 2
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
@@ -45,6 +45,7 @@ BuildRequires: crash-devel zlib-devel
 
 Requires: systemtap-client = %{version}-%{release}
 Requires: systemtap-devel = %{version}-%{release}
+Recommends: %{name}-help = %{version}-%{release}
 
 %description
 SystemTap is an instrumentation system for systems running Linux.
@@ -452,6 +453,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Thu Nov 12 2020 xinghe <xinghe1@huawei.com> - 4.3-2
+- add help for Recommends
+
 * Wed Aug 26 2020 xinghe <xinghe1@huawei.com> - 4.3-1
 - update to 4.3
 
