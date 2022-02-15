@@ -22,7 +22,7 @@
 
 Name: systemtap
 Version: 4.5
-Release: 1
+Release: 2
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
@@ -44,7 +44,6 @@ BuildRequires: crash-devel zlib-devel
 %endif
 
 Requires: systemtap-client = %{version}-%{release}
-Requires: systemtap-devel = %{version}-%{release}
 
 %description
 SystemTap is an instrumentation system for systems running Linux.
@@ -55,7 +54,7 @@ the components needed to locally develop and execute systemtap scripts.
 %package devel
 Summary: Programmable system-wide instrumentation system - development headers, tools
 License: GPLv2+
-Requires: gcc make kernel-devel systemd
+Requires: make kernel-devel systemd
 
 %description devel
 This package contains the components needed to compile a systemtap
@@ -452,6 +451,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Tue Feb 15 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 4.5-2
+- Remove requires on gcc and systemtap-devel
+
 * Thu Dec 2 2021 zhouwenpei <zhouwenpei1@huawei.com> - 4.5-1
 - upgrade to 4.5
 
