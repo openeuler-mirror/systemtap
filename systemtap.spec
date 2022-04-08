@@ -22,11 +22,13 @@
 
 Name: systemtap
 Version: 4.5
-Release: 2
+Release: 3
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
 Source: https://sourceware.org/systemtap/ftp/releases/%{name}-%{version}.tar.gz
+
+Patch1: 0001-Add-init-type-cast-to-resolve-gcc-issue.patch
 
 BuildRequires: gcc-c++ emacs systemd python3-setuptools
 BuildRequires: gettext-devel rpm-devel readline-devel
@@ -168,7 +170,7 @@ URL: http://sourceware.org/systemtap
 This package include systemtap manual
 
 %prep
-%setup -q %{?setup_elfutils}
+%autosetup -p1
 
 %build
 %configure \
@@ -451,6 +453,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Fri Apr 8 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 4.5-3
+- Add int type cast to resolve gcc issue for option Wformat=2
+
 * Tue Feb 15 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 4.5-2
 - Remove requires on gcc and systemtap-devel
 
