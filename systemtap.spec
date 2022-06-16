@@ -465,7 +465,7 @@ exit 0
 * Mon Feb 1 2021 xinghe <xinghe1@huawei.com> - 4.4-1
 - upgrade to 4.4
 
-* Thu Jul 21 2020 jinzhimin <jinzhimin2@huawei.com> - 4.3-1
+* Tue Jul 21 2020 jinzhimin <jinzhimin2@huawei.com> - 4.3-1
 - upgrade to 4.3
 
 * Fri Mar 13 2020 yuxiangyang <yuxiangyang4@huawei.com> - 4.1.3
