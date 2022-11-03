@@ -1,0 +1,31 @@
+diff -Naur systemtap-4.5.org/m4/intdiv0.m4 systemtap-4.5.sw/m4/intdiv0.m4
+--- systemtap-4.5.org/m4/intdiv0.m4	2022-02-26 07:18:18.530000000 +0000
++++ systemtap-4.5.sw/m4/intdiv0.m4	2022-02-26 07:21:23.240000000 +0000
+@@ -69,7 +69,7 @@
+             # Guess based on the CPU.
+ changequote(,)dnl
+             case "$host_cpu" in
+-              alpha* | i[34567]86 | x86_64 | m68k | s390*)
++              sw_64* | alpha* | i[34567]86 | x86_64 | m68k | s390*)
+                 gt_cv_int_divbyzero_sigfpe="guessing yes";;
+               *)
+                 gt_cv_int_divbyzero_sigfpe="guessing no";;
+diff -Naur systemtap-4.5.org/staplog.c systemtap-4.5.sw/staplog.c
+--- systemtap-4.5.org/staplog.c	2022-02-26 07:18:18.510000000 +0000
++++ systemtap-4.5.sw/staplog.c	2022-02-26 07:22:44.880000000 +0000
+@@ -22,12 +22,14 @@
+ 
+ /* crash/defs.h defines NR_CPUS based upon architecture macros
+    X86, X86_64, etc.  See crash/configure.c (!). */
+-#if !defined(X86) && !defined(X86_64) && !defined(ALPHA) && !defined(PPC) && \
++#if !defined(X86) && !defined(X86_64) && !defined(ALPHA) && !defined(SW_64) && !defined(PPC) && \
+     !defined(IA64) && !defined(PPC64) && !defined(S390) && !defined(S390X) && \
+     !defined(ARM) && !defined(ARM64)
+ 
+ #if defined(__alpha__)
+ #define ALPHA
++#elif defined(__sw_64__)
++#define SW_64
+ #elif defined(__x86_64__)
+ #define X86_64
+ #elif defined(__i386__)
