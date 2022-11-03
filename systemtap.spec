@@ -22,13 +22,14 @@
 
 Name: systemtap
 Version: 4.5
-Release: 3
+Release: 4
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
 Source: https://sourceware.org/systemtap/ftp/releases/%{name}-%{version}.tar.gz
 
 Patch1: 0001-Add-init-type-cast-to-resolve-gcc-issue.patch
+Patch2: systemtap-4.5-sw.patch
 
 BuildRequires: gcc-c++ emacs systemd python3-setuptools
 BuildRequires: gettext-devel rpm-devel readline-devel
@@ -181,7 +182,9 @@ This package include systemtap manual
 		--with-dracutstap=%{dracutstap} \
 		--with-dracutbindir=%{dracutbindir} \
 		--with-python3 \
+%ifnarch sw_64
 		--with-python3-probes \
+%endif
 		--enable-pie \
 		--with-rpm \
 		--enable-sqlite \
@@ -254,7 +257,9 @@ install -p -m 755 initscript/99stap/start-staprun.sh $RPM_BUILD_ROOT%{dracutstap
 touch $RPM_BUILD_ROOT%{dracutstap}/params.conf
 
 mkdir -p $RPM_BUILD_ROOT/stap-exporter
+%ifnarch sw_64
 install -p -m 755 stap-exporter/stap-exporter $RPM_BUILD_ROOT%{_bindir}
+%endif
 install -m 644 stap-exporter/stap-exporter.service $RPM_BUILD_ROOT%{_unitdir}
 install -m 644 stap-exporter/stap-exporter.8* $RPM_BUILD_ROOT%{_mandir}/man8
 
@@ -392,7 +397,9 @@ exit 0
 %{_emacs_sitelispdir}/*.el*
 %{_emacs_sitestartdir}/systemtap-init.el
 %{_datadir}/vim/vimfiles/*/*.vim
+%ifnarch sw_64
 %{_libexecdir}/systemtap/python/stap-resolve-module-function.py
+%endif
 
 %files runtime -f systemtap.lang
 %defattr(-,root,root)
@@ -439,20 +446,27 @@ exit 0
 %{_datadir}/systemtap/testsuite
 
 %files runtime-python3
+%ifnarch sw_64
 %{python3_sitearch}/HelperSDT
 %{python3_sitearch}/HelperSDT-*.egg-info
+%endif
 
 %files stap-exporter
 %{_unitdir}/stap-exporter.service
+%ifnarch sw_64
 %{_bindir}/stap-exporter
 /etc/stap-exporter/*
 /usr/sbin/stap-exporter
 /etc/sysconfig/stap-exporter
+%endif
 
 %files help
 %{_mandir}/man[1378]/*
 
 %changelog
+* Thu Oct 27 2022 wuzx<wuzx1226@qq.com> - 4.5-4
+- Add sw64 architecture
+
 * Mon Jun 20 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 4.5-3
 - Remove requires on gcc and systemtap-devel
 
