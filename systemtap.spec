@@ -22,7 +22,7 @@
 
 Name: systemtap
 Version: 4.5
-Release: 4
+Release: 5
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
@@ -331,8 +331,11 @@ fi
 exit 0
 
 %preun stap-exporter
+if [ "$1" -eq "0" ] ; then
 /bin/systemctl stop stap-exporter.service >/dev/null 2>&1 || :
 /bin/systemctl disable stap-exporter.service >/dev/null 2>&1 || :
+fi
+exit 0
 
 %post
 /bin/systemctl enable systemtap.service >/dev/null 2>&1 || :
@@ -464,6 +467,12 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Mon Dec 5 2022 langfei<langfei@huawei.com> - 4.5-5
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:Resolve stap-exporter.service chenge to disable when upgraded systemtap-stap-exporter package
+
 * Thu Oct 27 2022 wuzx<wuzx1226@qq.com> - 4.5-4
 - Add sw64 architecture
 
