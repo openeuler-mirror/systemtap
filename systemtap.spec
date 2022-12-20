@@ -22,7 +22,7 @@
 
 Name: systemtap
 Version: 4.5
-Release: 3
+Release: 4
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
@@ -326,8 +326,11 @@ fi
 exit 0
 
 %preun stap-exporter
+if [ "$1" -eq "0" ] ; then
 /bin/systemctl stop stap-exporter.service >/dev/null 2>&1 || :
 /bin/systemctl disable stap-exporter.service >/dev/null 2>&1 || :
+fi
+exit 0
 
 %post
 /bin/systemctl enable systemtap.service >/dev/null 2>&1 || :
@@ -453,6 +456,12 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Mon Dec 5 2022 langfei<langfei@huawei.com> - 4.5-4
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:Resolve stap-exporter.service chenge to disable when upgraded systemtap-stap-exporter package
+
 * Fri Apr 8 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 4.5-3
 - Add int type cast to resolve gcc issue for option Wformat=2
 
