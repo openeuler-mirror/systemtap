@@ -1,0 +1,29 @@
+gcc12 c++ compatibility tweak: use lambdas instead of ptr_fun<>
+author	Jonathan Wakely <jwakely.gcc@gmail.com>	
+	Tue, 18 Jan 2022 20:52:18 +0000 (15:52 -0500)
+committer	Frank Ch. Eigler <fche@redhat.com>	
+	Tue, 18 Jan 2022 20:52:18 +0000 (15:52 -0500)
+Even while stap is a c++11 code base, such cleanups make code
+nicer to look at.
+
+diff --git a/util.cxx b/util.cxx
+--- a/util.cxx
++++ b/util.cxx
+@@ -1761,7 +1761,7 @@
+ {
+   s.erase(s.begin(),
+ 	  std::find_if(s.begin(), s.end(),
+-		       std::not1(std::ptr_fun<int, int>(std::isspace))));
++                   [](unsigned char c) { return !std::isspace(c); }));
+ }
+ 
+ // trim from end (in place)
+@@ -1769,7 +1769,7 @@
+ rtrim(std::string &s)
+ {
+   s.erase(std::find_if(s.rbegin(), s.rend(),
+-	  std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
++                       [](unsigned char c) { return !std::isspace(c); }).base(), s.end());
+ }
+ 
+ // trim from both ends (in place)
