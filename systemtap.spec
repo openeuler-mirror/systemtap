@@ -22,13 +22,14 @@
 
 Name: systemtap
 Version: 4.5
-Release: 4
+Release: 5
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
 Source: https://sourceware.org/systemtap/ftp/releases/%{name}-%{version}.tar.gz
 
 Patch1: 0001-Add-init-type-cast-to-resolve-gcc-issue.patch
+Patch2: 0002-gcc12-c++-compatibility-tweak-use-lambdas-instead-of-ptr_fun.patch
 
 BuildRequires: gcc-c++ emacs systemd python3-setuptools
 BuildRequires: gettext-devel rpm-devel readline-devel
@@ -456,6 +457,12 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Tue Jan 31 2023 laokz<zhangkai@iscas.ac.cn> - 4.5-5
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:Add patch to fix gcc12 compatible failure
+
 * Mon Dec 5 2022 langfei<langfei@huawei.com> - 4.5-4
 - Type:bugfix
 - CVE:NA
