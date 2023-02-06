@@ -22,13 +22,14 @@
 
 Name: systemtap
 Version: 4.5
-Release: 4
+Release: 5
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
 Source: https://sourceware.org/systemtap/ftp/releases/%{name}-%{version}.tar.gz
 
 Patch1: 0001-Add-init-type-cast-to-resolve-gcc-issue.patch
+Patch2: 0001-PR29094-Include-rpm-rpmcrypto.h-when-required.patch
 
 BuildRequires: gcc-c++ emacs systemd python3-setuptools
 BuildRequires: gettext-devel rpm-devel readline-devel
@@ -456,6 +457,12 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Mon Feb 6 2023 langfei<langfei@huawei.com> - 4.5-5
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:Solve systemtap build problem in openEuler:MultiLanguage
+
 * Mon Dec 5 2022 langfei<langfei@huawei.com> - 4.5-4
 - Type:bugfix
 - CVE:NA

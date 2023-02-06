@@ -1,0 +1,93 @@
+From d752cdd14eefd0dd0c81bb5b4d7787394335a49e Mon Sep 17 00:00:00 2001
+From: William Cohen <wcohen@redhat.com>
+Date: Wed, 27 Apr 2022 14:14:17 -0400
+Subject: [PATCH] PR29094: Include rpm/rpmcrypto.h when required
+
+rpm-4.18.0 moved the prototypes for rpmFreeCrypto() into a new header,
+/usr/include/rpm/rpmcrypto.h.  Have the configure check for it
+and include it when required.
+---
+ config.in      |  3 +++
+ configure      | 19 +++++++++++++++++++
+ configure.ac   |  6 ++++++
+ rpm_finder.cxx |  3 +++
+ 4 files changed, 31 insertions(+)
+
+diff --git a/config.in b/config.in
+index 64740c9..12cd394 100644
+--- a/config.in
++++ b/config.in
+@@ -88,6 +88,9 @@
+ /* have librpm */
+ #undef HAVE_LIBRPM
+ 
++/* have rpmcrypto.h */
++#undef HAVE_RPMCRYPTO_H
++
+ /* have librpmio */
+ #undef HAVE_LIBRPMIO
+ 
+diff --git a/configure b/configure
+index abc4e7f..3694dbb 100755
+--- a/configure
++++ b/configure
+@@ -11524,6 +11524,25 @@ $as_echo "$as_me: WARNING: cannot find librpmio" >&2;}
+   fi
+ fi
+ 
++for ac_header in rpm/rpmcrypto.h
++do :
++  ac_fn_c_check_header_mongrel "$LINENO" "rpm/rpmcrypto.h" "ac_cv_header_rpm_rpmcrypto_h" "$ac_includes_default"
++if test "x$ac_cv_header_rpm_rpmcrypto_h" = xyes; then :
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_RPM_RPMCRYPTO_H 1
++_ACEOF
++
++
++$as_echo "#define HAVE_RPMCRYPTO_H 1" >>confdefs.h
++
++                      have_rpmcrypto_h=yes
++		      { $as_echo "$as_me:${as_lineno-$LINENO}: separate rpm/rpmcrypto.h" >&5
++$as_echo "$as_me: separate rpm/rpmcrypto.h" >&6;}
++fi
++
++done
++
++
+ LIBS_no_readline=$LIBS
+ 
+ have_libreadline="no"
+diff --git a/configure.ac b/configure.ac
+index 4ef80b7..ccb4fe0 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -490,6 +490,12 @@ if test "$with_rpm" != "no"; then
+   fi
+ fi
+ 
++dnl Look for rpmcrypto.h
++AC_CHECK_HEADERS([rpm/rpmcrypto.h], [
++		    AC_DEFINE([HAVE_RPMCRYPTO_H],[1],[have rpmcrypto_h])
++                      have_rpmcrypto_h=yes
++		      AC_MSG_NOTICE([separate rpm/rpmcrypto.h])])
++
+ dnl Look for readline.
+ dnl
+ dnl First save the orignal value of LIBS.
+diff --git a/rpm_finder.cxx b/rpm_finder.cxx
+index 206669b..052058a 100644
+--- a/rpm_finder.cxx
++++ b/rpm_finder.cxx
+@@ -26,6 +26,9 @@ extern "C" {
+ #include <rpm/rpmlib.h>
+ #include <rpm/rpmts.h>
+ #include <rpm/rpmdb.h>
++#ifdef HAVE_RPMCRYPTO_H
++#include <rpm/rpmcrypto.h>
++#endif
+ #include <rpm/header.h>
+ 
+ #ifndef xfree
+-- 
+1.8.3.1
+
