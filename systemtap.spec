@@ -22,7 +22,7 @@
 
 Name: systemtap
 Version: 4.5
-Release: 6
+Release: 7
 Summary: Linux trace and probe tool
 License: GPLv2+ and Public Domain
 URL: http://sourceware.org/systemtap
@@ -177,6 +177,7 @@ This package include systemtap manual
 %if "%toolchain" == "clang"
 	export CFLAGS="$CFLAGS -Wno-error=overloaded-virtual -Wno-error=unused-but-set-variable -Wno-error=inconsistent-missing-override -Wno-error=unused-but-set-parameter -Wno-error=absolute-value -Wno-error=return-type -Wno-error=deprecated-copy-with-user-provided-copy -Wno-error=mismatched-tags -Wno-error=format-nonliteral"
 	export CXXFLAGS="$CXXFLAGS -Wno-error=overloaded-virtual -Wno-error=unused-but-set-variable -Wno-error=inconsistent-missing-override -Wno-error=unused-but-set-parameter -Wno-error=absolute-value -Wno-error=return-type -Wno-error=deprecated-copy-with-user-provided-copy -Wno-error=mismatched-tags -Wno-error=format-nonliteral"
+	export LDFLAGS=`echo $LDFLAGS | sed 's/-fno-openmp-implicit-rpath//g'`
 %endif
 %configure \
 		%{dyninst_config} \
@@ -461,6 +462,9 @@ exit 0
 %{_mandir}/man[1378]/*
 
 %changelog
+* Thu Jul 20 2023 yoo <sunyuechi@iscas.ac.cn> - 4.5-7
+- fix clang build error: openmp
+
 * Thu May 25 2023 yoo <sunyuechi@iscas.ac.cn> - 4.5-6
 - fix clang build error
 
